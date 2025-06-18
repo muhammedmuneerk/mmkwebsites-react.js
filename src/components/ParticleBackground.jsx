@@ -8,7 +8,6 @@ export default function ParticleBackground() {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
 
@@ -30,7 +29,7 @@ export default function ParticleBackground() {
       mouseX = e.clientX / window.innerWidth - 0.5;
       mouseY = e.clientY / window.innerHeight - 0.5;
     };
-    window.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mousemove', onMouseMove);
 
     const onResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -50,7 +49,7 @@ export default function ParticleBackground() {
     animate();
 
     return () => {
-      window.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', onResize);
       renderer.dispose();
     };
